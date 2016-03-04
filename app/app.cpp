@@ -28,12 +28,16 @@ void split(string &str, char delimiter,vector<string> &internal) {
   
 }
 
-void parse_data_file(char* path,vector<Sequence>& out){
+void parse_data_file(string path,vector<Sequence>& out){
 	out.reserve(200000);
 	ifstream file(path);
 
     string line; 
 	vector<string> words;
+
+    cout << path << endl;
+    cout << file.fail() << endl;
+    cout << file.bad() << endl;
 	
 	if (file.is_open())
 	{
@@ -46,7 +50,9 @@ void parse_data_file(char* path,vector<Sequence>& out){
 				out.emplace_back(words[5],words[7],words[9]);
 			words.clear();
 		}
-	}
+	} else {
+        perror("file hasn't been opened");
+    }
 }
 
 void parse_gen_file(char* path,vector<Sequence>& out){
@@ -54,6 +60,8 @@ void parse_gen_file(char* path,vector<Sequence>& out){
 	ifstream file(path);
     string line; 
 	vector<string> words;
+
+    cout << path << endl;
 	
 	if (file.is_open())
 	{
@@ -67,7 +75,10 @@ void parse_gen_file(char* path,vector<Sequence>& out){
 			words.clear();
 			
 		}
-	}
+	} else {
+        perror("file hasn't been opened");
+//        cout << "file hasn't been opened " << endl;
+    }
 }
 
 void writeToSingleJson(SelectionModel &model, string pathToExportFolder){
@@ -172,14 +183,15 @@ int main(int argc, char* argv[])
 	vector<Sequence> data;
 	
 	cout<<"start parsing data file\n";
-	parse_data_file("../test_data.txt",data);
+	parse_data_file("/Users/vdn/Projects/mimir/test_data.txt",data);
 	cout<<"start parsing gen file\n";
-	parse_gen_file("../test_gen.txt",gen);
+	parse_gen_file("/Users/vdn/Projects/mimir/test_gen.txt",gen);
 
     if (data.size() == 0 || gen.size() == 0) {
         cout << "bad lengths of data files" << endl;
         cout << (size_t) data.size() << endl;
         cout << (size_t) gen.size() << endl;
+        return 1;
     }
 
 	SelectionModel* S=new SelectionModel();
