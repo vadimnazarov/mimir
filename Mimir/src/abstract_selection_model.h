@@ -25,7 +25,7 @@ namespace mimir {
     typedef std::vector<Qvalue> QvalueVec;
 
 
-    typedef JsonValue ModelParameters;
+    typedef Json::Value ModelParameters;
 
 
     class AbstractSelectionModel {
@@ -44,11 +44,9 @@ namespace mimir {
 
 
         bool read(const string_t &filepath) {
-            this->make_parameters();
-
             std::ifstream stream(filepath);
             if (stream.is_open()) {
-                /* read JSON here */
+                stream >> _parameters;
                 return true;
             }
             return false;
@@ -56,11 +54,9 @@ namespace mimir {
 
 
         bool write(const string_t &filepath) {
-            this->make_parameters();
-
             std::ifstream stream(filepath);
             if (stream.is_open()) {
-                /* write JSON here */
+                stream << _parameters;
                 return true;
             }
             return false;
@@ -71,13 +67,6 @@ namespace mimir {
     protected:
 
         ModelParameters _parameters;
-
-
-        /**
-         * \brief Make JsonValue parameters from the model-specific internal
-         * representation of parameters;
-         */
-        virtual void make_parameters() = 0;
 
     };
 }
