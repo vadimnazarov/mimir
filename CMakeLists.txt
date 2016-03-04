@@ -2,15 +2,16 @@ cmake_minimum_required(VERSION 2.8)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 
-project(mimir)
+project(Mimir)
 
-file(GLOB SelectionSources "source/selection/*.h" "source/selection/*.cpp")
+file(GLOB MimirSources "Mimir/src/*.h" "Mimir/src/*.cpp")
 file(GLOB AppSources "source/app/*.cpp")
 
-include_directories(${CMAKE_SOURCE_DIR}/source/selection)
-include_directories(${CMAKE_SOURCE_DIR}/source/app)
+include_directories(${CMAKE_SOURCE_DIR}/Mimir)
+include_directories(${CMAKE_SOURCE_DIR}/app)
+include_directories(include)
 
-add_library(selection STATIC ${SelectionSources})
-add_executable(app source/app/app.cpp)
+add_library(Mimir STATIC ${MimirSources})
+add_executable(app app/app.cpp)
 
-target_link_libraries(app selection)
+target_link_libraries(app Mimir)
