@@ -5,11 +5,11 @@
 #include <sstream>
 
 
+#include <vector>
 #include <stdio.h>
-#include <tchar.h>
 #include <iostream>
-#include "selection_model.h"
-#include <Inference>
+#include "../source/selection/selection_model.h"
+//#include <Inference>
 
 using namespace std;
 using namespace mimir;
@@ -70,7 +70,7 @@ void parse_gen_file(char* path,vector<Sequence>& out){
 	}
 }
 
-void writeToSingleJson(SelectionModel &model,char* pathToExportFolder){
+void writeToSingleJson(SelectionModel &model, string pathToExportFolder){
 	ofstream file;
 	float* L=model.get_q_L();
 	file.open(pathToExportFolder+string("//coefs.json"));
@@ -166,27 +166,33 @@ void writeToSingleJson(SelectionModel &model,char* pathToExportFolder){
 	file.close();
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, char* argv[])
 {
 	vector<Sequence> gen;
 	vector<Sequence> data;
 	
 	cout<<"start parsing data file\n";
-	parse_data_file("C://immunology//github//mimir//build//Debug//data.txt",data);
+	parse_data_file("../test_data.txt",data);
 	cout<<"start parsing gen file\n";
-	parse_gen_file("C://immunology//github//mimir//build//Debug//gen.txt",gen);
+	parse_gen_file("../test_gen.txt",gen);
+
+    if (data.size() == 0 || gen.size() == 0) {
+        cout << "bad lengths of data files" << endl;
+        cout << (size_t) data.size() << endl;
+        cout << (size_t) gen.size() << endl;
+    }
 
 	SelectionModel* S=new SelectionModel();
 	cout<<"start fiting\n";
 	S->fit(data,gen);
 	cout<<"fit done";
-	writeToSingleJson(*S,"");
+	writeToSingleJson(*S,"./");
 
-    PositionalSelectionModel *model;
-    ModifiedGradientDescent fit_algo;
-    fit_algo.fit(model, , , );
-    model->write("coefs.json");
-    delete model;
+//    PositionalSelectionModel *model;
+//    ModifiedGradientDescent fit_algo;
+//    fit_algo.fit(model, , , );
+//    model->write("coefs.json");
+//    delete model;
 
 	return 0;
 }

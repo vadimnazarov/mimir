@@ -1,9 +1,12 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <vector>
 #include <map>
 #include <string>
+
+#include "math.h"
 
 
 using namespace std;
@@ -97,7 +100,7 @@ namespace mimir {
 		static const int MAX_STEP;
 		int minL,maxL;
 		map<string,int>* V_indexes, * J_indexes;
-		map<char,int> SelectionModel::aminoAcidIndexes;
+		map<char,int> aminoAcidIndexes;
 
 		float* data_Ldistribution;
 		float* data_VJpairDistribution;
