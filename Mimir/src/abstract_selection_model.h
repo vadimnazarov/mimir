@@ -51,7 +51,7 @@ namespace mimir {
             QvalueVec res;
             res.reserve(cloneset.size());
             for (size_t i = 0; i < cloneset.size(); ++i) {
-                if (cloneset[i].is_coding()) {
+                if (cloneset[i].isCoding()) {
                     res.push_back(this->predict(cloneset[i]));
                 } else {
                     res.push_back(0);
