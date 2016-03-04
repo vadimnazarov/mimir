@@ -47,11 +47,15 @@ namespace mimir {
         virtual Qvalue predict(const Clonotype& clonotype) const = 0;
 
 
-        virtual QvalueVec predict(const Cloneset &cloneset) const {
+        virtual QvalueVec predict(const ClonesetView &cloneset) const {
             QvalueVec res;
             res.reserve(cloneset.size());
             for (size_t i = 0; i < cloneset.size(); ++i) {
-                res.push_back(this->predict(cloneset[i]));
+                if (cloneset[i].is_coding()) {
+                    res.push_back(this->predict(cloneset[i]));
+                } else {
+                    res.push_back(0);
+                }
             }
             return res;
         }
