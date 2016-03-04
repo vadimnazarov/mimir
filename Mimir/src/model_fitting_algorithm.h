@@ -24,19 +24,35 @@ namespace mimir {
         };
 
 
-        virtual void fit(M *model,
-                         const Cloneset &exp_data,
-                         const Cloneset &gen_data,
-                         const Parameters &params) const = 0;
+        void fit(M *model,
+                 const ClonesetView &exp_data,
+                 const ClonesetView &gen_data,
+                 const Parameters &params) const
+        {
+            ModelParameters mod_pars = this->_fit(exp_data.coding(), gen_data.coding(), params);
+            if (model) {
+                model->set_parameters(mod_pars);
+            } else {
+                model = new M(mod_pars);
+            }
+        }
+
 
         void fit(M *model,
-                 const Cloneset &exp_data,
+                 const ClonesetView &exp_data,
                  const ProbabilisticAssemblingModel &model,
                  size_t num_clonotypes_to_generate = 1000000,
                  const Parameters &params) const
         {
             this->fit(M, exp_data, model.generateSequences(num_clonotypes_to_generate), params);
         }
+
+
+    protected:
+
+        virtual ModelParameters _fit(const ClonesetView &exp_data,
+                                     const ClonesetView &gen_data,
+                                     const Parameters &params) const = 0;
 
     };
 
