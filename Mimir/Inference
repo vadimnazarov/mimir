@@ -7,6 +7,7 @@
 
 
 #include "src/positional_gradient_descent.h"
+#include "src/positional_modified_gradient_descent.h"
 
 
 #endif //MIMIR_INFERENCE_H
