@@ -13,26 +13,18 @@ namespace mimir {
 
 
     class PositionalSelectionModel : public AbstractSelectionModel {
+
     public:
+
+        PositionalSelectionModel(const ModelParameters &params)
+            : AbstractSelectionModel(params)
+        {
+        }
 
 
         virtual Qvalue predict(const Clonotype& clonotype) const {
-
+            // Using _parameters or anything else, compute Qvalues
         }
-
-
-        virtual bool read(const string_t &filepath) {
-
-        }
-
-
-        virtual bool write(const string_t &filepath) const {
-
-        }
-
-
-    protected:
-
 
     };
 
