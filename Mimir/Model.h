@@ -6,6 +6,7 @@
 #define MIMIR_MODEL_H
 
 
+#include "src/positional_selection_model.h"
 
 
 #endif //MIMIR_MODEL_H

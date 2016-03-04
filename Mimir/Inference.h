@@ -5,4 +5,8 @@
 #ifndef MIMIR_INFERENCE_H
 #define MIMIR_INFERENCE_H
 
+
+#include "src/positional_gradient_descent.h"
+
+
 #endif //MIMIR_INFERENCE_H

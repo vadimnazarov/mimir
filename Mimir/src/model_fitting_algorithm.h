@@ -35,8 +35,7 @@ namespace mimir {
                  size_t num_clonotypes_to_generate = 1000000,
                  const Parameters &params) const
         {
-            Cloneset gen_data = model.generateSequences(num_clonotypes_to_generate);
-            this->fit(M, exp_data, gen_data, params);
+            this->fit(M, exp_data, model.generateSequences(num_clonotypes_to_generate), params);
         }
     };
 
