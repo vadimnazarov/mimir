@@ -37,6 +37,7 @@ namespace mimir {
         {
             this->fit(M, exp_data, model.generateSequences(num_clonotypes_to_generate), params);
         }
+
     };
 
 }
