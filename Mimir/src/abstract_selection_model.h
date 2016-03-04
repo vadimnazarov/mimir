@@ -7,8 +7,12 @@
 
 
 #include <vector>
+#include <fstream>
 
 #include <Ymir/Graph>
+
+
+using namespace ymir;
 
 
 namespace mimir {
@@ -19,6 +23,9 @@ namespace mimir {
 
     typedef double Qvalue;
     typedef std::vector<Qvalue> QvalueVec;
+
+
+    typedef JsonValue ModelParameters;
 
 
     class AbstractSelectionModel {
@@ -35,9 +42,42 @@ namespace mimir {
             return res;
         }
 
-        virtual bool read(const string_t &filepath) = 0;
 
-        virtual bool write(const string_t &filepath) const = 0;
+        bool read(const string_t &filepath) {
+            this->make_parameters();
+
+            std::ifstream stream(filepath);
+            if (stream.is_open()) {
+                /* read JSON here */
+                return true;
+            }
+            return false;
+        }
+
+
+        bool write(const string_t &filepath) {
+            this->make_parameters();
+
+            std::ifstream stream(filepath);
+            if (stream.is_open()) {
+                /* write JSON here */
+                return true;
+            }
+            return false;
+        }
+
+        const ModelParameters& parameters() const { return _parameters; }
+
+    protected:
+
+        ModelParameters _parameters;
+
+
+        /**
+         * \brief Make JsonValue parameters from the model-specific internal
+         * representation of parameters;
+         */
+        virtual void make_parameters() = 0;
 
     };
 }
