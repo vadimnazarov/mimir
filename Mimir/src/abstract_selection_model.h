@@ -29,9 +29,23 @@ namespace mimir {
 
 
     class AbstractSelectionModel {
+
     public:
 
+
+        AbstractSelectionModel()
+        {
+        }
+
+
+        AbstractSelectionModel(const ModelParameters &params)
+            : _parameters(params)
+        {
+        }
+
+
         virtual Qvalue predict(const Clonotype& clonotype) const = 0;
+
 
         virtual QvalueVec predict(const Cloneset &cloneset) const {
             QvalueVec res;
@@ -63,6 +77,9 @@ namespace mimir {
         }
 
         const ModelParameters& parameters() const { return _parameters; }
+
+
+        void set_parameters(const ModelParameters &params) { _parameters = params; }
 
     protected:
 
