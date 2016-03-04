@@ -1,4 +1,4 @@
-// test.cpp: определяет точку входа для консольного приложения.
+// test.cpp: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 //
 #include <fstream>
 #include <string>
@@ -9,6 +9,7 @@
 #include <tchar.h>
 #include <iostream>
 #include "selection_model.h"
+#include <Inference>
 
 using namespace std;
 using namespace mimir;
@@ -181,6 +182,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"fit done";
 	writeToSingleJson(*S,"");
 
+    PositionalSelectionModel *model;
+    ModifiedGradientDescent fit_algo;
+    fit_algo.fit(model, , , );
+    model->write("coefs.json");
+    delete model;
 
 	return 0;
 }
