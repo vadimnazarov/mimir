@@ -14,6 +14,8 @@
 
 using namespace ymir;
 
+using std::unique_ptr;
+
 
 namespace mimir {
 

@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "../source/selection/selection_model.h"
-//#include <Inference>
+#include <Inference>
 
 using namespace std;
 using namespace mimir;
@@ -200,11 +200,16 @@ int main(int argc, char* argv[])
 	cout<<"fit done";
 	writeToSingleJson(*S,"./");
 
-//    PositionalSelectionModel *model;
-//    ModifiedGradientDescent fit_algo;
-//    fit_algo.fit(model, , , );
+//    PositSelecModel_ptr model;
+//    unique_ptr<ModelFittingAlgorithm<PositionalSelectionModel>> algo;
+//    ModelFittingAlgorithm<PositionalSelectionModel>::Parameters params;
+//	if (argv[1] == "grad") {
+//        algo.reset(new GradientDescent());
+//	} else if (argv[1] == "newton") {
+//        algo.reset(new ModifiedGradientDescent());
+//	}
+//    algo->fit(model.get(), exp_data, gen_data);
 //    model->write("coefs.json");
-//    delete model;
 
 	return 0;
 }

@@ -28,6 +28,9 @@ namespace mimir {
 
     };
 
+
+    typedef unique_ptr<PositionalSelectionModel> PositSelecModel_ptr;
+
 }
 
 
