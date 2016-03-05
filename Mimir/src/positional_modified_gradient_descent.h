@@ -15,10 +15,19 @@ namespace mimir {
 
     class ModifiedGradientDescent : public ModelFittingAlgorithm<PositionalSelectionModel> {
 
-        void fit(PositionalSelectionModel *model,
-                 const Cloneset &exp_data,
-                 const Cloneset &gen_data,
-                 const Parameters &params) const
+    public:
+
+        struct Parameters {
+            int max_step;
+            double eps;
+            /* more parameters? */
+        };
+
+    protected:
+
+        virtual ModelParameters _fit(const ClonesetView &exp_data,
+                                     const ClonesetView &gen_data,
+                                     const Parameters &params) const
         {
 
         }

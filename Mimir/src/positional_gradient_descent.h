@@ -23,10 +23,11 @@ namespace mimir {
         };
 
 
-        void fit(PositionalSelectionModel *model,
-                 const Cloneset &exp_data,
-                 const Cloneset &gen_data,
-                 const Parameters &params) const
+    protected:
+
+        virtual ModelParameters _fit(const ClonesetView &exp_data,
+                                     const ClonesetView &gen_data,
+                                     const Parameters &params) const
         {
 
         }
