@@ -386,27 +386,26 @@ double SelectionModel::evalfMaxLikehood(SequenceVector &gen_seq,SequenceVector &
 }
 double SelectionModel::optimizeStep(SequenceVector &gen_seq,SequenceVector &data_seq,double* F,double* emptyArray,int Lsize,int VJsize,int AAsize,double* delt){
 	double phi=0.5*(1+sqrt(5));
-	double a=0;
-	double b=10;
-	while(abs(b-a)>0.01){
-		double x1=b-(b-a)/phi;
-		double x2=a+(b-a)/phi;
-		double y1=evalfMaxLikehood(gen_seq,data_seq,x1,F,Lsize,VJsize,AAsize);
-		double y2=evalfMaxLikehood(gen_seq,data_seq,x2,F,Lsize,VJsize,AAsize);
-		if(y1<=y2){
-			a=x1;
-			x1=x2;
-			x2=a+(b-a)/phi;
-		}
-		else
-		{
-			b=x2;
-			x2=x1;
-			x1=b-(b-a)/phi;
-		}
-	}
-	double out=0.5*(a+b);
-	//double out=1;
+    double a=0;
+    double b=10;
+    while(abs(b-a)>0.01){
+        double x1=b-(b-a)/phi;
+        double x2=a+(b-a)/phi;
+        double y1=evalfMaxLikehood(gen_seq,data_seq,x1,F,Lsize,VJsize,AAsize);
+        double y2=evalfMaxLikehood(gen_seq,data_seq,x2,F,Lsize,VJsize,AAsize);
+        if(y1<=y2){
+            a=x1;
+            x1=x2;
+            x2=a+(b-a)/phi;
+        }
+        else
+        {
+            b=x2;
+            x2=x1;
+            x1=b-(b-a)/phi;
+        }
+    }
+    double out=0.5*(a+b);
 	*delt=evalfMaxLikehood(gen_seq,data_seq,out,F,Lsize,VJsize,AAsize);
 	return out;
 }

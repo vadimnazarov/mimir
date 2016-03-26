@@ -15,4 +15,6 @@ include_directories(${CMAKE_SOURCE_DIR}/source/app)
 add_library(selection STATIC ${SelectionSources})
 add_executable(app source/app/app.cpp)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++11")
+
 target_link_libraries(app selection)

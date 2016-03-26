@@ -1,4 +1,4 @@
-// test.cpp: определяет точку входа для консольного приложения.
+// test.cpp: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 //
 #include <fstream>
 #include <string>
@@ -6,7 +6,6 @@
 
 
 #include <stdio.h>
-#include <tchar.h>
 #include <iostream>
 #include "selection_model.h"
 
@@ -70,7 +69,7 @@ void parse_gen_file(char* path,vector<Sequence>& out){
 	}
 }
 
-void writeToSingleJson(SelectionModel &model,char* path){
+void writeToSingleJson(SelectionModel &model, const string &path){
 	ofstream file;
 	double* L=model.get_q_L();
 	file.open(path);
@@ -166,7 +165,7 @@ void writeToSingleJson(SelectionModel &model,char* path){
 	file.close();
 }
 
-int _tmain(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 	vector<Sequence> gen;
 	vector<Sequence> data;
@@ -180,7 +179,7 @@ int _tmain(int argc, char* argv[])
 	cout<<"start fiting\n";
 	S->fit(data,gen);
 	cout<<"fit done";
-	writeToSingleJson(*S,"coef.json");
+	writeToSingleJson(*S, std::string(argv[1]) + ".json");
 
 
 	return 0;
