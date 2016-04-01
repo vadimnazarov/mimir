@@ -24,7 +24,8 @@ grid_arrange_shared_legend <- function(...) {
       x + theme(legend.position="none"))),
     legend,
     ncol = 1,
-    heights = unit.c(unit(.95, "npc") - lheight, lheight), top = "Зависимость логарифма правдоподобия от числа итераций")
+    # heights = unit.c(unit(.95, "npc") - lheight, lheight), top = "Зависимость логарифма правдоподобия от числа итераций")
+    heights = unit.c(unit(.95, "npc") - lheight, lheight), top = "Log-likelihood ~ iterations")
 }
 
 
@@ -56,11 +57,14 @@ load_logs <- function () {
     p = ggplot() + geom_line(aes(x = Iter, y = logL, colour = Algo, linegroup = Algo), data = logs[[tw]]) + 
       theme_linedraw() + 
       ggtitle(tw) +
-      xlab("Итерация") +
+      # xlab("Итерация") +
+      xlab("Iteration") + 
       theme(legend.position="none") + scale_color_discrete(
-        name="Градиентный спуск",
+        # name="Градиентный спуск",
+        name="Gradient descent",
         breaks=c("const_5", "const1", "const2", "var"),
-        labels=c("шаг 0.5", "шаг 1.0", "шаг 2.0", "переменный шаг"))
+        # labels=c("шаг 0.5", "шаг 1.0", "шаг 2.0", "переменный шаг"))
+      labels=c("step=0.5", "step=1.0", "step=2.0", "variable step"))
     
     pls <- c(pls, list(p))
   }
@@ -140,12 +144,14 @@ plot_qcors <- function () {
       geom_label(aes(x = hi, y = lo), hjust = -(lo - hi) / 2.1, vjust = -(lo - hi) / 8, label = cors[i]) +
       theme_linedraw() + 
       ggtitle(paste0(tw_names[i], " (", tw_sizes[i], ")")) + 
-      coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("q (перем. шаг)") + ylab("q (конст. шаг)") + 
+      # coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("q (перем. шаг)") + ylab("q (конст. шаг)") + 
+      coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("q (var. step)") + ylab("q (const. step)") + 
       .colourblind.gradient(.min = min_val, .max = max_val, F) +
       theme(legend.position = "none")
     pls <- c(pls, list(p)) 
   }; 
-  do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Совместные распределения параметров моделей селекции, полученные разными алгоритмами (аминокислоты)")))
+  # do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Совместные распределения параметров моделей селекции, полученные разными алгоритмами (аминокислоты)")))
+  do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Amino acids")))
 }
 
 
@@ -175,12 +181,14 @@ plot_vjcors <- function () {
       geom_label(aes(x = hi, y = lo), hjust = -(lo - hi) / 1.6, vjust = -(lo - hi) / 8, label = cors[i]) +
       theme_linedraw() + 
       ggtitle(paste0(tw_names[i], " (", tw_sizes[i], ")")) + 
-      coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("q (перем. шаг)") + ylab("q (конст. шаг)") + 
+      # coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("q (перем. шаг)") + ylab("q (конст. шаг)") + 
+      coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("q (var. step)") + ylab("q (const. step)") + 
       .colourblind.gradient(.min = min_val, .max = max_val, F) +
       theme(legend.position = "none")
     pls <- c(pls, list(p)) 
   }; 
-  do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Совместные распределения параметров моделей селекции, полученные разными алгоритмами (гены)")))
+  # do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Совместные распределения параметров моделей селекции, полученные разными алгоритмами (гены)")))
+  do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Genes")))
 }
 
 
@@ -210,10 +218,12 @@ plot_lencors <- function () {
       geom_label(aes(x = hi, y = lo), hjust = -(lo - hi) / .8, vjust = -(lo - hi) / 8, label = cors[i]) +
       theme_linedraw() + 
       ggtitle(paste0(tw_names[i], " (", tw_sizes[i], ")")) + 
-      coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("L (перем. шаг)") + ylab("L (конст. шаг)") + 
+      # coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("L (перем. шаг)") + ylab("L (конст. шаг)") + 
+      coord_fixed(xlim = c(lo, hi), ylim=c(lo, hi)) + xlab("q (var. step)") + ylab("q (const. step)") + 
       .colourblind.gradient(.min = min_val, .max = max_val, F) +
       theme(legend.position = "none")
     pls <- c(pls, list(p)) 
   }; 
-  do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Совместные распределения параметров моделей селекции, полученные разными алгоритмами (длина)")))
+  # do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Совместные распределения параметров моделей селекции, полученные разными алгоритмами (длина)")))
+  do.call(arrangeGrob, c(pls, list(nrow = 2, top = "Lengths")))
 }
